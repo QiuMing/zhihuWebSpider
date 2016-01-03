@@ -59,7 +59,7 @@ public class UserDetailInfoPipeline implements Pipeline {
 					record.setStatus(entry.getValue().toString());
 					break;
 				case "lastMessageTime":
-					record.setLastupdatetime(DateTime.parse(entry.getValue().toString()).toDate());
+					record.setLastmessagetime(DateTime.parse(entry.getValue().toString()).toDate());
 				default:
 					break;
 				}

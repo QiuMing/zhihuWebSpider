@@ -47,12 +47,6 @@ public class UserBaseInfo {
     @ExtractBy(value = "//div[@class='title-section ellipsis']/span[@class='bio']/@title")
     private String headline;
 
-    /**
-     * 最后信息时间
-     */
-    @ExtractBy(value = "//span[@class='zm-profile-setion-time zg-gray zg-right']/text()")
-    @Column(name = "lastMessageTime")
-    private String lastmessagetime;
 
     /**
      * 关注了
@@ -260,16 +254,6 @@ public class UserBaseInfo {
         this.headline = headline == null ? null : headline.trim();
     }
 
-
-
-    /**
-     * 设置最后信息时间
-     *
-     * @param lastmessagetime 最后信息时间
-     */
-    public void setLastmessagetime(String lastmessagetime) {
-        this.lastmessagetime = lastmessagetime == null ? null : lastmessagetime.trim();
-    }
 
     /**
      * 获取关注了

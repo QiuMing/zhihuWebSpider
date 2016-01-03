@@ -3,17 +3,18 @@ package com.ming.zhihuWebSpider.spider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
-import com.ming.zhihuWebSpider.model.UserBaseInfo;
-import com.ming.zhihuWebSpider.pipeline.UserBaseInfoPipeline;
-
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
 
+import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
+import com.ming.zhihuWebSpider.model.UserBaseInfo;
+import com.ming.zhihuWebSpider.pipeline.UserBaseInfoPipeline;
 
 @Component
-public class UserBaseInfoSpider implements Crawl {
+public class UserBaseInfoCrawl {
 
 	@Autowired
 	private UserBaseInfoPipeline userBaseInfoPipeline;
@@ -34,12 +35,10 @@ public class UserBaseInfoSpider implements Crawl {
 			.setCharset("UTF-8");
 
 	public void crawl() {
+		JedisPool pool = new JedisPool(new JedisPoolConfig(), "127.0.0.1");
 		OOSpider.create(site, userBaseInfoPipeline, UserBaseInfo.class)
 				.scheduler(new RedisScheduler(pool)).addUrl(START_URL)
 				.thread(4).run();
 	}
 
-	public static void main(String[] args) {
-		applicationContext.getBean(UserBaseInfoSpider.class).crawl();
-	}
 }

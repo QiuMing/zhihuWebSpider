@@ -76,12 +76,7 @@ public class UserDetailInfo {
      * 状态
      */
     private String status;
-    
-    /**
-     * 最近更新时间
-     */
-    private Date lastupdatetime;
-
+   
     
     /**
      * limit  查询参数
@@ -92,6 +87,13 @@ public class UserDetailInfo {
      * 查询结果数量
      */
     private Integer itemResultAmount;
+    
+    /**
+     * 最后信息时间
+     */
+    @Column(name = "lastMessageTime")
+    private Date lastmessagetime;
+    
     /**
      * 获取ID
      *
@@ -342,11 +344,12 @@ public class UserDetailInfo {
 		this.itemResultAmount = itemResultAmount;
 	}
 
-	public Date getLastupdatetime() {
-		return lastupdatetime;
+	public Date getLastmessagetime() {
+		return lastmessagetime;
 	}
 
-	public void setLastupdatetime(Date lastupdatetime) {
-		this.lastupdatetime = lastupdatetime;
+	public void setLastmessagetime(Date lastmessagetime) {
+		this.lastmessagetime = lastmessagetime;
 	}
+
 }

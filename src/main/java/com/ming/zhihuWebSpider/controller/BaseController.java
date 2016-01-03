@@ -12,6 +12,7 @@ import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
 import com.ming.zhihuWebSpider.mapping.UserDetailInfoMapper;
 import com.ming.zhihuWebSpider.model.UserBaseInfo;
 import com.ming.zhihuWebSpider.model.UserDetailInfo;
+import com.ming.zhihuWebSpider.spider.UserBaseInfoCrawl;
 
 @Controller
 public class BaseController {
@@ -22,13 +23,18 @@ public class BaseController {
 	@Autowired
 	private UserDetailInfoMapper userDetailInfoMapper;
 	
+	@Autowired
+	private UserBaseInfoCrawl userBaseInfoCrawl;
+	
 	@RequestMapping("zhihu")
 	public String showPage(ModelMap model) {
 		System.out.println("----------");
+		userBaseInfoCrawl.crawl();
 		model.put("test", "test");
 		return "zhihu";
 		
 	}
+	
 	
 	enum Gender{
 		female,male,unknow

@@ -8,8 +8,6 @@
 		<result column="location" property="location" jdbcType="VARCHAR" />
 		<result column="weiboUrl" property="weibourl" jdbcType="VARCHAR" />
 		<result column="headline" property="headline" jdbcType="VARCHAR" />
-		<result column="lastMessageTime" property="lastmessagetime"
-			jdbcType="VARCHAR" />
 		<result column="followees" property="followees" jdbcType="INTEGER" />
 		<result column="followers" property="followers" jdbcType="INTEGER" />
 		<result column="columns" property="columns" jdbcType="INTEGER" />
@@ -34,7 +32,6 @@
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, pageUrl, nickname, location, weiboUrl, headline,
-		lastMessageTime,
 		followees, followers, columns, topics, pageViews,
 		questions, answers,
 		articles, collections,

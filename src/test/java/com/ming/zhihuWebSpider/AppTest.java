@@ -2,7 +2,6 @@ package com.ming.zhihuWebSpider;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
 import com.alibaba.fastjson.JSON;
 import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
@@ -26,10 +25,10 @@ public class AppTest    extends AbstractServiceTests
 	@Autowired
 	private UserBaseInfoServiceI userBaseInfoServiceI;
 	
-     @Test
+     /*@Test
      public void test_sellectAll(){
     	 logger.info(JSON.toJSONString(userBaseInfoMapper.selectAll()));
-     }
+     }*/
      
      @Test
      public void test_selectFunction(){
@@ -40,10 +39,10 @@ public class AppTest    extends AbstractServiceTests
     	 logger.info(JSON.toJSONString(userDetailInfoMapper.getEducationStatic(10)));
     	 logger.info(JSON.toJSONString(userDetailInfoMapper.getEmploymentStatic(10)));
      }
-     @Test @Rollback(false)
+     @Test  
      public void test_insertUserDetailInfo(){
     	 UserDetailInfo record = new UserDetailInfo();
-    	 record.setPageurl("pageUrl");
+    	 record.setPageurl("pageUrlaa");
     	 record.setNickname("nickname");
     	 record.setBusiness("business");
     	 record.setShares(5);

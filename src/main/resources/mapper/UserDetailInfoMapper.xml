@@ -15,8 +15,7 @@
 		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
 		<result column="gender" property="gender" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
-		<result column="lastUpdateTime" property="lastupdatetime"
-			jdbcType="TIMESTAMP" />
+		<result column="lastMessageTime" property="lastmessagetime" jdbcType="VARCHAR" />
 		<result column="itemResultAmount" property="itemResultAmount" jdbcType="INTEGER" />
 		<result column="selectLimitAmount" property="selectLimitAmount" jdbcType="INTEGER" />
 	</resultMap>
@@ -25,7 +24,7 @@
 		position, education,
 		educationExtra,
 		collecters, shares,
-		addtime,gender,status,lastUpdateTime
+		addtime,gender,status,lastMessageTime
 	</sql>
 
 	<select id="getBusinessStatic" resultMap="BaseResultMap">
