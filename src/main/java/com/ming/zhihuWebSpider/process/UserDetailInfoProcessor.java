@@ -22,7 +22,7 @@ public class UserDetailInfoProcessor implements PageProcessor{
 	private static final String TARGET_USER_BASE_INFO = "http://www\\.zhihu\\.com/people/[\\w-]+";
 		
 	private Site site = Site.me()
-			.setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(300).setTimeOut(3 * 60 * 1000)
+			.setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(1000).setTimeOut(3 * 60 * 1000)
 			.setUserAgent(
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31")
                     .setCharset("UTF-8")
@@ -49,6 +49,11 @@ public class UserDetailInfoProcessor implements PageProcessor{
 		page.putField("employment",page.getHtml().xpath("//span[@class='employment item']/@title").toString());
 		page.putField("position",page.getHtml().xpath("//span[@class='position item']/@title").toString());
 		page.putField("collecters",page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[4]/strong/text()").toString());
+		
+		System.err.println(page.getUrl());
+		System.err.println(page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[4]/strong/text()").toString());
+		System.err.println(page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[5]/strong/text()").toString());
+		
 		page.putField("shares",page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[5]/strong/text()").toString());
 		page.putField("education",page.getHtml().xpath("//span[@class='education item']/a/text()").toString());
 		page.putField("educationExtra",page.getHtml().xpath("//span[@class='education-extra item']/a/text()").toString());
