@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ming.zhihuWebSpider.mapping.UserDetailInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ming.zhihuWebSpider.model.UserDetailInfo">
+		<id column="detail_user_id" property="detailUserId" jdbcType="INTEGER" />
+		<result column="pageUrl" property="pageurl" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="business" property="business" jdbcType="VARCHAR" />
+		<result column="employment" property="employment" jdbcType="VARCHAR" />
+		<result column="position" property="position" jdbcType="VARCHAR" />
+		<result column="education" property="education" jdbcType="VARCHAR" />
+		<result column="educationExtra" property="educationextra" jdbcType="VARCHAR" />
+		<result column="collecters" property="collecters" jdbcType="INTEGER" />
+		<result column="shares" property="shares" jdbcType="INTEGER" />
+		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="lastUpdateTime" property="lastupdatetime"
+			jdbcType="TIMESTAMP" />
+		<result column="itemResultAmount" property="itemResultAmount" jdbcType="INTEGER" />
+		<result column="selectLimitAmount" property="selectLimitAmount" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		detail_user_id, pageUrl, nickname, business, employment,
+		position, education,
+		educationExtra,
+		collecters, shares,
+		addtime,gender,status,lastUpdateTime
+	</sql>
+
+	<select id="getBusinessStatic" resultMap="BaseResultMap">
+		select
+		business,count(business) as itemResultAmount from user_detail_info group by
+		business order by itemResultAmount desc limit #{selectLimitAmount}
+	</select>
+
+	<select id="getEmploymentStatic" resultMap="BaseResultMap">
+		select
+		employment,count(employment) as itemResultAmount from user_detail_info
+		group by
+		employment order by itemResultAmount desc limit  #{selectLimitAmount}
+	</select>
+
+	<select id="getEducationStatic" resultMap="BaseResultMap">
+		select
+		education,count(education) as itemResultAmount from user_detail_info
+		group by
+		education order by itemResultAmount desc limit  #{selectLimitAmount}
+	</select>
+	
+	<!--  
+	SELECT lastUpdateTime,  hour( lastUpdateTime ),count(*)
+FROM user_detail_info
+GROUP BY hour( lastUpdateTime )
+	
+	-->
+
+</mapper>

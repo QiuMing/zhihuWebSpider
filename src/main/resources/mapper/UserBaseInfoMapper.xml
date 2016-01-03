@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper">
+	<resultMap id="BaseResultMap" type="com.ming.zhihuWebSpider.model.UserBaseInfo">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="pageUrl" property="pageurl" jdbcType="VARCHAR" />
+		<result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		<result column="location" property="location" jdbcType="VARCHAR" />
+		<result column="weiboUrl" property="weibourl" jdbcType="VARCHAR" />
+		<result column="headline" property="headline" jdbcType="VARCHAR" />
+		<result column="lastMessageTime" property="lastmessagetime"
+			jdbcType="VARCHAR" />
+		<result column="followees" property="followees" jdbcType="INTEGER" />
+		<result column="followers" property="followers" jdbcType="INTEGER" />
+		<result column="columns" property="columns" jdbcType="INTEGER" />
+		<result column="topics" property="topics" jdbcType="INTEGER" />
+		<result column="pageViews" property="pageviews" jdbcType="INTEGER" />
+		<result column="questions" property="questions" jdbcType="INTEGER" />
+		<result column="answers" property="answers" jdbcType="INTEGER" />
+		<result column="articles" property="articles" jdbcType="INTEGER" />
+		<result column="collections" property="collections" jdbcType="INTEGER" />
+		<result column="edits" property="edits" jdbcType="INTEGER" />
+		<result column="agreeNums" property="agreenums" jdbcType="INTEGER" />
+		<result column="thanksNums" property="thanksnums" jdbcType="INTEGER" />
+		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+		<result column="itemResultAmount" property="itemResultAmount"
+			jdbcType="INTEGER" />
+		<result column="selectLimitAmount" property="selectLimitAmount"
+			jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.ming.zhihuWebSpider.model.UserBaseInfo"
+		extends="BaseResultMap">
+		<result column="description" property="description" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, pageUrl, nickname, location, weiboUrl, headline,
+		lastMessageTime,
+		followees, followers, columns, topics, pageViews,
+		questions, answers,
+		articles, collections,
+		edits, agreeNums, thanksNums,
+		addtime
+	</sql>
+	<sql id="Blob_Column_List">
+		description
+	</sql>
+
+	<select id="getLocationStatic" resultMap="BaseResultMap">
+		select
+		location,count(location) as itemResultAmount from user_base_info
+		group by
+		location order by itemResultAmount desc limit #{selectLimitAmount}
+	</select>
+	
+	<select id="getAmountByReocordItem" resultMap="BaseResultMap">
+	 <if test="questions != null" >
+	 	select sum(questions) from user_base_info
+	 </if>
+	 <if test="answers != null" >
+	 	select sum(answers) from user_base_info
+	 </if>
+	 <if test="articles != null" >
+	 	select sum(articles) from user_base_info
+	 </if>
+	 <if test="collections != null" >
+	 	select sum(collections) from user_base_info
+	 </if>
+	 <if test="agreeNums != null" >
+	 	select sum(agreeNums) from user_base_info
+	 </if>
+	 <if test="thanksNums != null" >
+	 	select sum(thanksNums) from user_base_info
+	 </if>
+	 <if test="followees != null" >
+	 	select sum(followees) from user_base_info
+	 </if>
+	 <if test="followers != null" >
+	 	select sum(followers) from user_base_info
+	 </if>
+	 <if test="topics != null" >
+	 	select sum(followers) from user_base_info
+	 </if>
+	 <if test="columns != null" >
+	 	select sum(columns) from user_base_info
+	 </if>
+	 <if test="edits != null" >
+	 	select sum(edits) from user_base_info
+	 </if>
+	</select>
+	
+
+</mapper>
