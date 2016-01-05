@@ -3,13 +3,13 @@ package com.ming.zhihuWebSpider.spider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.model.OOSpider;
+
+import com.ming.zhihuWebSpider.extend.RedisSchedulerExtend;
 import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
 import com.ming.zhihuWebSpider.model.UserBaseInfo;
 import com.ming.zhihuWebSpider.pipeline.UserBaseInfoPipeline;
-
-import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.model.OOSpider;
-import us.codecraft.webmagic.scheduler.RedisScheduler;
 
 
 @Component
@@ -35,7 +35,7 @@ public class UserBaseInfoSpider implements Crawl {
 
 	public void crawl() {
 		OOSpider.create(site, userBaseInfoPipeline, UserBaseInfo.class)
-				.scheduler(new RedisScheduler(pool)).addUrl(START_URL)
+				.scheduler(new RedisSchedulerExtend(pool,1)).addUrl(START_URL)
 				.thread(4).run();
 	}
 

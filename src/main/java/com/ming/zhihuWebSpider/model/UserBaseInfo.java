@@ -136,6 +136,18 @@ public class UserBaseInfo {
     private String description;
 
     /**
+     * 最近动态（未处理后）
+     */
+    @ExtractBy(value="//span[@class='zm-profile-setion-time zg-gray zg-right']/text()")
+    @Column(name = "lastDynamic")
+    private String lastdynamic;
+    
+	/**
+     * 最近动态（处理）
+     */
+    @Column(name = "lastDynamicTime")
+    private Date lastdynamictime;
+    /**
      * limit  查询参数
      */
     private Integer selectLimitAmount;
@@ -521,5 +533,20 @@ public class UserBaseInfo {
 
 	public void setSelectLimitAmount(Integer selectLimitAmount) {
 		this.selectLimitAmount = selectLimitAmount;
+	}
+
+	public Date getLastdynamictime() {
+		return lastdynamictime;
+	}
+
+	public void setLastdynamictime(Date lastdynamictime) {
+		this.lastdynamictime = lastdynamictime;
+	}
+	public String getLastdynamic() {
+		return lastdynamic;
+	}
+
+	public void setLastdynamic(String lastdynamic) {
+		this.lastdynamic = lastdynamic;
 	}
 }

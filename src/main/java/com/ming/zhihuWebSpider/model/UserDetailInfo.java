@@ -89,12 +89,6 @@ public class UserDetailInfo {
     private Integer itemResultAmount;
     
     /**
-     * 最后信息时间
-     */
-    @Column(name = "lastMessageTime")
-    private Date lastmessagetime;
-    
-    /**
      * 获取ID
      *
      * @return detail_user_id - ID
@@ -342,14 +336,6 @@ public class UserDetailInfo {
 
 	public void setItemResultAmount(Integer itemResultAmount) {
 		this.itemResultAmount = itemResultAmount;
-	}
-
-	public Date getLastmessagetime() {
-		return lastmessagetime;
-	}
-
-	public void setLastmessagetime(Date lastmessagetime) {
-		this.lastmessagetime = lastmessagetime;
 	}
 
 }

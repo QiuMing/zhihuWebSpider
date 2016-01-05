@@ -15,9 +15,10 @@
 		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
 		<result column="gender" property="gender" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
-		<result column="lastMessageTime" property="lastmessagetime" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="DetailInfoForStatic" type="com.ming.zhihuWebSpider.model.UserDetailInfo" extends="BaseResultMap">
 		<result column="itemResultAmount" property="itemResultAmount" jdbcType="INTEGER" />
-		<result column="selectLimitAmount" property="selectLimitAmount" jdbcType="INTEGER" />
+		<result column="selectLimitAmount" property="selectLimitAmount" jdbcType="INTEGER" />	
 	</resultMap>
 	<sql id="Base_Column_List">
 		detail_user_id, pageUrl, nickname, business, employment,
@@ -27,20 +28,20 @@
 		addtime,gender,status,lastMessageTime
 	</sql>
 
-	<select id="getBusinessStatic" resultMap="BaseResultMap">
+	<select id="getBusinessStatic" resultMap="DetailInfoForStatic">
 		select
 		business,count(business) as itemResultAmount from user_detail_info group by
 		business order by itemResultAmount desc limit #{selectLimitAmount}
 	</select>
 
-	<select id="getEmploymentStatic" resultMap="BaseResultMap">
+	<select id="getEmploymentStatic" resultMap="DetailInfoForStatic">
 		select
 		employment,count(employment) as itemResultAmount from user_detail_info
 		group by
 		employment order by itemResultAmount desc limit  #{selectLimitAmount}
 	</select>
 
-	<select id="getEducationStatic" resultMap="BaseResultMap">
+	<select id="getEducationStatic" resultMap="DetailInfoForStatic">
 		select
 		education,count(education) as itemResultAmount from user_detail_info
 		group by

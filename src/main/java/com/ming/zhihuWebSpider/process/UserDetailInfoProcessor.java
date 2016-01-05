@@ -1,10 +1,7 @@
 package com.ming.zhihuWebSpider.process;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Strings;
-import org.joda.time.DateTime;
 
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -35,13 +32,13 @@ public class UserDetailInfoProcessor implements PageProcessor{
 	@Override
 	public void process(Page page) {
 		//进入详细页进行进行抓取
-		List<String> urls = page.getHtml().links().regex(TARGET_USER_BASE_INFO).all();
+		/*List<String> urls = page.getHtml().links().regex(TARGET_USER_BASE_INFO).all();
 		for(String s:urls){
 			if (StringUtils.isBlank(s) || s.equals("#") || s.startsWith("javascript:")) {
                 continue;
             }
 			page.addTargetRequest(s+"/about");
-		}
+		}*/
 		
 		page.putField("pageUrl",page.getHtml().xpath("//div[@class='profile-navbar clearfix']/a[1]/@href").toString());
 		page.putField("nickname",page.getHtml().xpath("//div[@class='title-section ellipsis']/span[1]/text()").toString());
@@ -51,8 +48,8 @@ public class UserDetailInfoProcessor implements PageProcessor{
 		page.putField("collecters",page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[4]/strong/text()").toString());
 		
 		System.err.println(page.getUrl());
-		System.err.println(page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[4]/strong/text()").toString());
-		System.err.println(page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[5]/strong/text()").toString());
+		//System.err.println(page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[4]/strong/text()").toString());
+		//System.err.println(page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[5]/strong/text()").toString());
 		
 		page.putField("shares",page.getHtml().xpath("//div[@class='zm-profile-module-desc']/span[5]/strong/text()").toString());
 		page.putField("education",page.getHtml().xpath("//span[@class='education item']/a/text()").toString());
@@ -74,7 +71,7 @@ public class UserDetailInfoProcessor implements PageProcessor{
 		else if(gender.equals("icon icon-profile-female"))
 			page.putField("gender", "female");
 		
-		String lastMessageTime =page.getHtml().xpath("//span[@class='zm-profile-setion-time zg-gray zg-right']/text()").toString();
+		/*String lastMessageTime =page.getHtml().xpath("//span[@class='zm-profile-setion-time zg-gray zg-right']/text()").toString();
 		if(!StringUtils.isEmpty(lastMessageTime)){
 			String[] time = lastMessageTime.split(" ");
 			DateTime dateTime = new DateTime();
@@ -99,8 +96,9 @@ public class UserDetailInfoProcessor implements PageProcessor{
 				resultTime = dateTime.plusYears(-Integer.valueOf(time[0])).toString();
 				break;
 			}
+			System.err.println(resultTime);
 			page.putField("lastMessageTime", resultTime);
-	}
+		}*/
 		
 	}
 

@@ -2,7 +2,6 @@ package com.ming.zhihuWebSpider.pipeline;
 
 import java.util.Map;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -58,8 +57,6 @@ public class UserDetailInfoPipeline implements Pipeline {
 				case "status":
 					record.setStatus(entry.getValue().toString());
 					break;
-				case "lastMessageTime":
-					record.setLastmessagetime(DateTime.parse(entry.getValue().toString()).toDate());
 				default:
 					break;
 				}

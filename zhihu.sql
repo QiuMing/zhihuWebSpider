@@ -6,7 +6,6 @@ CREATE TABLE `user_base_info` (
   `weiboUrl` varchar(248) DEFAULT NULL COMMENT '微博地址',
   `headline` varchar(248) DEFAULT NULL COMMENT '一句话介绍',
   `description` text DEFAULT NULL COMMENT '个人简介',
-  `lastMessageTime` varchar(248) DEFAULT NULL COMMENT '最后信息时间',
   `followees` int(11) DEFAULT '0' COMMENT '关注了',
   `followers` int(11) DEFAULT '0' COMMENT '关注者',
   `columns` int(11) DEFAULT '0' COMMENT '关注专栏',
@@ -19,7 +18,9 @@ CREATE TABLE `user_base_info` (
   `edits` int(11) DEFAULT '0' COMMENT '公共编辑',
   `agreeNums` int(11) DEFAULT '0' COMMENT '赞同',
   `thanksNums` int(11) DEFAULT '0' COMMENT '感谢',
-  `addtime`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
+  `lastDynamic`varchar(20) DEFAULT NULL COMMENT '最近动态(未处理)',
+  `lastDynamicTime` timestamp DEFAULT NULL COMMENT '最近动态（处理后）',
+  `addtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`),
   unique(`pageUrl`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -37,8 +38,7 @@ CREATE TABLE `user_detail_info` (
   `educationExtra` varchar(11) DEFAULT NULL COMMENT '专业方向',
   `collecters` int(11) DEFAULT '0' COMMENT '收藏者',
   `shares` int(11) DEFAULT '0' COMMENT '分享',
-  `addtime`  timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '添加时间',
-  `lastUpdateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最近更新时间', 
+  `addtime`  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`detail_user_id`),
   unique(`pageUrl`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

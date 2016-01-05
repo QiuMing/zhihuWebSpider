@@ -20,6 +20,7 @@
 		<spring-version>4.2.0.RC1</spring-version>
 		<mysql.version>5.1.35</mysql.version>
 		<mapper.version>3.3.0</mapper.version>
+		 <start-class>com.ming.zhihuWebSpider.App</start-class>
 	</properties>
 
 	<dependencies>                                                      <!--申明依赖，子项目直接引入并默认继承 -->

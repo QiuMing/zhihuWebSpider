@@ -21,14 +21,15 @@
 		<result column="agreeNums" property="agreenums" jdbcType="INTEGER" />
 		<result column="thanksNums" property="thanksnums" jdbcType="INTEGER" />
 		<result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
-		<result column="itemResultAmount" property="itemResultAmount"
-			jdbcType="INTEGER" />
-		<result column="selectLimitAmount" property="selectLimitAmount"
-			jdbcType="INTEGER" />
+		<result column="lastDynamic" property="lastdynamic" jdbcType="VARCHAR" />
+		<result column="lastDynamicTime" property="lastdynamictime" jdbcType="TIMESTAMP" />
 	</resultMap>
-	<resultMap id="ResultMapWithBLOBs" type="com.ming.zhihuWebSpider.model.UserBaseInfo"
-		extends="BaseResultMap">
+	<resultMap id="ResultMapWithBLOBs" type="com.ming.zhihuWebSpider.model.UserBaseInfo" extends="BaseResultMap">
 		<result column="description" property="description" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<resultMap id="BaseInfoForStatic" type="com.ming.zhihuWebSpider.model.UserBaseInfo" extends="BaseResultMap">
+		<result column="itemResultAmount" property="itemResultAmount" jdbcType="INTEGER" />
+		<result column="selectLimitAmount" property="selectLimitAmount" jdbcType="INTEGER" />	
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, pageUrl, nickname, location, weiboUrl, headline,
@@ -36,13 +37,13 @@
 		questions, answers,
 		articles, collections,
 		edits, agreeNums, thanksNums,
-		addtime
+		addtime,lastDynamic,lastDynamicTime
 	</sql>
 	<sql id="Blob_Column_List">
 		description
 	</sql>
 
-	<select id="getLocationStatic" resultMap="BaseResultMap">
+	<select id="getLocationStatic" resultMap="BaseInfoForStatic">
 		select
 		location,count(location) as itemResultAmount from user_base_info
 		group by

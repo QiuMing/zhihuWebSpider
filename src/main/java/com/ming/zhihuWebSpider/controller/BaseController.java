@@ -29,12 +29,10 @@ public class BaseController {
 	@RequestMapping("zhihu")
 	public String showPage(ModelMap model) {
 		System.out.println("----------");
-		userBaseInfoCrawl.crawl();
 		model.put("test", "test");
 		return "zhihu";
 		
 	}
-	
 	
 	enum Gender{
 		female,male,unknow
