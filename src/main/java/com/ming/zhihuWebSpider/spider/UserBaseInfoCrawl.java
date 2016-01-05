@@ -9,7 +9,6 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
 
-import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
 import com.ming.zhihuWebSpider.model.UserBaseInfo;
 import com.ming.zhihuWebSpider.pipeline.UserBaseInfoPipeline;
 
@@ -20,9 +19,6 @@ public class UserBaseInfoCrawl {
 	private UserBaseInfoPipeline userBaseInfoPipeline;
 
 	private static final String START_URL = "http://www.zhihu.com/people/excited-vczh";
-
-	@Autowired
-	private UserBaseInfoMapper userBaseInfoMapper;
 
 	private Site site = Site
 			.me()

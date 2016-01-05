@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.PageModelPipeline;
 
-import com.alibaba.fastjson.JSON;
 import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
 import com.ming.zhihuWebSpider.model.UserBaseInfo;
 
@@ -19,13 +18,6 @@ public class UserBaseInfoPipeline implements PageModelPipeline<UserBaseInfo> {
 	@Override
 	public void process(UserBaseInfo t, Task task) {
 		userBaseInfoMapper.insertSelective(t);
-	}
-	
-	public int getBaseUsersAccount(){
-		UserBaseInfo record = new UserBaseInfo();
-		record.setId(11);
-		System.out.println(JSON.toJSONString(record));
-		return userBaseInfoMapper.selectCount(record);
 	}
 
 }

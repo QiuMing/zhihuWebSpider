@@ -7,8 +7,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import us.codecraft.webmagic.Spider;
 
-import com.ming.zhihuWebSpider.extend.HttpClientDownloaderExtend;
-import com.ming.zhihuWebSpider.extend.RedisSchedulerExtend;
+import com.ming.zhihuWebSpider.extend.QueueNameConstant;
+import com.ming.zhihuWebSpider.extend.RedisSchedulerExtend2;
 import com.ming.zhihuWebSpider.pipeline.UserDetailInfoPipeline;
 import com.ming.zhihuWebSpider.process.UserDetailInfoProcessor;
 
@@ -28,8 +28,8 @@ public class UserDetailInfoSpider implements Crawl {
 				.addUrl(START_URL)
 				.addPipeline(userDetailInfoPipeline)
 				//.setScheduler(new FileCacheQueueScheduler("/usr/zhihu/cache"))
-				.setDownloader(new HttpClientDownloaderExtend("/about"))
-				.scheduler(new RedisSchedulerExtend(pool,1))
+				//.setDownloader(new HttpClientDownloaderExtend("/about"))
+				.scheduler(new RedisSchedulerExtend2(pool,1,QueueNameConstant.QUEUE_USER_DETAIL_INFO))
 				.thread(1).run();
 	}
 

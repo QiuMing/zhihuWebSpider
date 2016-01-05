@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 
-import com.ming.zhihuWebSpider.extend.RedisSchedulerExtend;
-import com.ming.zhihuWebSpider.mapping.UserBaseInfoMapper;
+import com.ming.zhihuWebSpider.extend.QueueNameConstant;
+import com.ming.zhihuWebSpider.extend.RedisSchedulerExtend2;
 import com.ming.zhihuWebSpider.model.UserBaseInfo;
 import com.ming.zhihuWebSpider.pipeline.UserBaseInfoPipeline;
 
@@ -19,9 +19,6 @@ public class UserBaseInfoSpider implements Crawl {
 	private UserBaseInfoPipeline userBaseInfoPipeline;
 
 	private static final String START_URL = "http://www.zhihu.com/people/excited-vczh";
-
-	@Autowired
-	private UserBaseInfoMapper userBaseInfoMapper;
 
 	private Site site = Site
 			.me()
@@ -35,7 +32,8 @@ public class UserBaseInfoSpider implements Crawl {
 
 	public void crawl() {
 		OOSpider.create(site, userBaseInfoPipeline, UserBaseInfo.class)
-				.scheduler(new RedisSchedulerExtend(pool,1)).addUrl(START_URL)
+				.scheduler(new RedisSchedulerExtend2(pool,1,QueueNameConstant.QUEUE_USER_BASE_INFO))
+				.addUrl(START_URL)
 				.thread(4).run();
 	}
 

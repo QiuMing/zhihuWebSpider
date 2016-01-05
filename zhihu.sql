@@ -1,6 +1,6 @@
 CREATE TABLE `user_base_info` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `pageUrl` varchar(60)  NOT NULL COMMENT '抓取页URL',
+  `pageUrl` varchar(200)  NOT NULL COMMENT '抓取页URL',
   `nickname` varchar(60) NOT NULL DEFAULT '' COMMENT '用户名',
   `location` varchar(32) DEFAULT NULL COMMENT '居住地',
   `weiboUrl` varchar(248) DEFAULT NULL COMMENT '微博地址',
@@ -19,7 +19,7 @@ CREATE TABLE `user_base_info` (
   `agreeNums` int(11) DEFAULT '0' COMMENT '赞同',
   `thanksNums` int(11) DEFAULT '0' COMMENT '感谢',
   `lastDynamic`varchar(20) DEFAULT NULL COMMENT '最近动态(未处理)',
-  `lastDynamicTime` timestamp DEFAULT NULL COMMENT '最近动态（处理后）',
+  `lastDynamicTime` timestamp DEFAULT '0000-00-00 00:00:00', COMMENT '最近动态（处理后）',
   `addtime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '添加时间',
   PRIMARY KEY (`id`),
   unique(`pageUrl`)
@@ -27,7 +27,7 @@ CREATE TABLE `user_base_info` (
 
 CREATE TABLE `user_detail_info` (
   `detail_user_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `pageUrl` varchar(60)  NOT NULL COMMENT '抓取页URL',
+  `pageUrl` varchar(200)  NOT NULL COMMENT '抓取页URL',
   `nickname` varchar(60) NOT NULL DEFAULT '' COMMENT '用户名',
   `gender` varchar(32) DEFAULT NULL COMMENT'性别',   
   `status`  varchar(248) DEFAULT NULL  COMMENT '状态',

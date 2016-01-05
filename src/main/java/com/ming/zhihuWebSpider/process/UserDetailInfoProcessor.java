@@ -1,5 +1,7 @@
 package com.ming.zhihuWebSpider.process;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.util.Strings;
 
@@ -32,14 +34,15 @@ public class UserDetailInfoProcessor implements PageProcessor{
 	@Override
 	public void process(Page page) {
 		//进入详细页进行进行抓取
-		/*List<String> urls = page.getHtml().links().regex(TARGET_USER_BASE_INFO).all();
+		List<String> urls = page.getHtml().links().regex(TARGET_USER_BASE_INFO).all();
 		for(String s:urls){
 			if (StringUtils.isBlank(s) || s.equals("#") || s.startsWith("javascript:")) {
                 continue;
             }
-			page.addTargetRequest(s+"/about");
-		}*/
-		
+			//page.addTargetRequest(s+"/about");
+			System.err.println(s);
+		}
+		page.addTargetRequests(page.getHtml().links().regex(TARGET_USER_BASE_INFO).all());
 		page.putField("pageUrl",page.getHtml().xpath("//div[@class='profile-navbar clearfix']/a[1]/@href").toString());
 		page.putField("nickname",page.getHtml().xpath("//div[@class='title-section ellipsis']/span[1]/text()").toString());
 		page.putField("business",page.getHtml().xpath("//span[@class='business item']/a/text()").toString());

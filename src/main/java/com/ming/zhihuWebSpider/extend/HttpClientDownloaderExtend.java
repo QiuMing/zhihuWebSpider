@@ -45,9 +45,11 @@ public class HttpClientDownloaderExtend extends AbstractDownloader {
 
     private String urlExtend;
     
+    //允许对从队列里面获取的url 进行处理
     public HttpClientDownloaderExtend(String urlExtend){
     	this.urlExtend = urlExtend;
     }
+    
     private CloseableHttpClient getHttpClient(Site site) {
         if (site == null) {
             return httpClientGenerator.getClient(null);
