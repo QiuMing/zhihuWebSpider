@@ -11,7 +11,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 
 import com.ming.zhihuWebSpider.mapping.UserDetailInfoMapper;
 import com.ming.zhihuWebSpider.model.UserDetailInfo;
-@Component("UserDetailInfoPipeline")
+@Component
 public class UserDetailInfoPipeline implements Pipeline {
 
 	@Autowired

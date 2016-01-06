@@ -80,7 +80,6 @@ public class RedisSchedulerExtend2 extends DuplicateRemovedScheduler implements
 			//jedis.rpush(getQueueKey(task), request.getUrl());
 			jedis.rpush(QueueNameConstant.QUEUE_USER_BASE_INFO   + task.getUUID(), request.getUrl());
 			jedis.rpush(QueueNameConstant.QUEUE_USER_DETAIL_INFO + task.getUUID(), request.getUrl()+"/about");
-			//jedis.rpush(USER_DETAIL_INFO + task, request.getUrl()+"/about");
 			if (request.getExtras() != null) {
 				String field = DigestUtils.shaHex(request.getUrl());
 				String value = JSON.toJSONString(request);

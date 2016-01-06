@@ -31,6 +31,7 @@ public class UserDetailInfoSpider2 implements Crawl {
 
 	public void crawl() {
 		OOSpider.create(site, userDetailInfoPipeline2, UserDetailInfo.class)
+		//.setDownloader(new HttpClientDownloaderExtend("/about"))
 		.scheduler(new RedisSchedulerExtend2(pool,1,QueueNameConstant.QUEUE_USER_DETAIL_INFO))
 		.addUrl(START_URL)
 		.thread(4).run();

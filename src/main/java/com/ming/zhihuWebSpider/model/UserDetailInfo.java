@@ -11,7 +11,7 @@ import us.codecraft.webmagic.model.annotation.HelpUrl;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
 @HelpUrl("http://www.zhihu.com/people/[\\w-]+/followers")
-@TargetUrl(value="http://www.zhihu.com/people/[\\w-]+")
+@TargetUrl(value="http://www.zhihu.com/people/[\\w-]+/about")
 @Table(name = "user_detail_info")
 public class UserDetailInfo {
     /**

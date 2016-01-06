@@ -8,7 +8,7 @@ import us.codecraft.webmagic.pipeline.PageModelPipeline;
 
 import com.ming.zhihuWebSpider.mapping.UserDetailInfoMapper;
 import com.ming.zhihuWebSpider.model.UserDetailInfo;
-@Component
+@Component("UserDetailInfoPipeline2")
 public class UserDetailInfoPipeline2 implements PageModelPipeline<UserDetailInfo> {
 	
 	@Autowired
