@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.PageModelPipeline;
 
+import com.alibaba.fastjson.JSON;
 import com.ming.zhihuWebSpider.mapping.UserDetailInfoMapper;
 import com.ming.zhihuWebSpider.model.UserDetailInfo;
 @Component("UserDetailInfoPipeline2")
@@ -16,6 +17,7 @@ public class UserDetailInfoPipeline2 implements PageModelPipeline<UserDetailInfo
 	@Override
 	public void process(UserDetailInfo t, Task task) {
 		// TODO Auto-generated method stub
+		System.err.println(JSON.toJSONString(t));
 		userDetailInfoMapper.insertSelective(t);
 	}
 

@@ -20,14 +20,13 @@ public class UserDetailInfoProcessor implements PageProcessor{
 		
 	private static final String TARGET_USER_BASE_INFO = "http://www\\.zhihu\\.com/people/[\\w-]+";
 		
-	private Site site = Site.me()
-			.setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(1000).setTimeOut(3 * 60 * 1000)
+	private Site site = Site.me().setCycleRetryTimes(5).setRetryTimes(5).setSleepTime(300).setTimeOut(3 * 60 * 1000)
 			.setUserAgent(
                     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31")
                     .setCharset("UTF-8")
-		            .addCookie("_xsrf", "6e73d7f68dae280f27655eabe0ab7c9c")
-			        .addCookie("_za", "f46dbfc6-85d4-4851-852c-2539f9e7e7c2")
-			        .addCookie("z_c0", "QUFDQVBrOGlBQUFYQUFBQVlRSlZUZXBpamxhbEI3VjEzMnFIYXR3U2o0Y0puaVU4amhRVGp3PT0=|1449580010|22d9dbb0761d2d713ee40aa33fb1f7f062dd5036")
+		            .addCookie("_xsrf", "cf81e98c4f3b9ea548e9df87a4e5a320")
+			        .addCookie("_za", "8d9d4056-20d8-4d22-bdf7-e88443560b4e")
+			        .addCookie("z_c0", "QUFDQVBrOGlBQUFYQUFBQVlRSlZUYUQ2dGxiSGozdE42SnNlbzg0U2o2WGk5RDZ2Yi1VWUd3PT0=|1452240288|066af60adedc1989e42f55733738e2738a00c2ed")
 			        .addCookie("__utmc", "51854390") ;
 
 	

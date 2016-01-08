@@ -542,5 +542,11 @@ public class UserBaseInfo {
 	public void setLastdynamictime(Date lastdynamictime) {
 		this.lastdynamictime = lastdynamictime;
 	}
+	public String getLastdynamic() {
+		return lastdynamic;
+	}
 
+	public void setLastdynamic(String lastdynamic) {
+		this.lastdynamic = lastdynamic;
+	}
 }
