@@ -41,12 +41,10 @@
 		//---------------------------------------------
 		var locationData='';
 		$.post("getLocationInfo",function(data){
-			console.log(data)
 			console.log(JSON.stringify(data))
         	locationData = data
 		});
-		console.log('----'+JSON.stringify(locationData))
-		console.log(locationData.xAxis)
+
 		//---------------------------------------------
 		var businessData='';
 		$.post("getBusinessStatic",function(data){
