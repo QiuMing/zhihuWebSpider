@@ -45,22 +45,25 @@
 		//---------------------------------------------
 		var locationData='';
 		$.post("getLocationInfo",function(data){
+			console.log(JSON.stringify(data))
         	locationData = data
 		});
-
 		//---------------------------------------------
 		var businessData='';
 		$.post("getBusinessStatic",function(data){
+			console.log(JSON.stringify(data))
 			businessData = data
 		});
 		//---------------------------------------------
 		var educationData='';
 		$.post("getEducationStatic",function(data){
+			console.log(JSON.stringify(data))
 			educationData = data
 		});
 		//---------------------------------------------
 		var employmentData ='';
 		$.post("getEmploymentStatic",function(data){
+			console.log(JSON.stringify(data))
 			employmentData = data
 		});
 		//---------------------------------------------
