@@ -45,7 +45,6 @@
 		//---------------------------------------------
 		var locationData='';
 		$.post("getLocationInfo",function(data){
-			console.log(JSON.stringify(data))
         	locationData = data
 		});
 
@@ -441,7 +440,7 @@
 	        		    calculable : false,
 	        		    series : [
 	        		        {
-	        		            name:'矩形图',
+	        		            name:'',
 	        		            type:'treemap',
 	        		            itemStyle: {
 	        		                normal: {
