@@ -465,19 +465,26 @@
 	        		};
             
             genderChart.hideLoading(); 
-            genderChart.setOption(option);
             
             locationChart.hideLoading(); 
-            locationChart.setOption(locationOption);
+           
             
             businessChart.hideLoading(); 
-            businessChart.setOption(businessOption);
+           
             
             educationChart.hideLoading(); 
-            educationChart.setOption(educationOption);
             
-            employmentChart.hideLoading(); 
-            employmentChart.setOption(employmentOption);
+            
+            employmentChart.hideLoading();
+            console.log('--')
+            setTimeout(function(){
+            console.log('--')
+	            locationChart.setOption(locationOption);
+	            genderChart.setOption(option);
+	            employmentChart.setOption(employmentOption);
+	            businessChart.setOption(businessOption);
+	            educationChart.setOption(educationOption);
+            },3000);
         }
         
     </script>
