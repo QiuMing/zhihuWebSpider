@@ -1,7 +1,5 @@
 package com.ming.zhihuWebSpider;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -77,12 +75,6 @@ public class AppTest    extends AbstractServiceTests
     	 record.setStatus("active");
     	 userDetailInfoMapper.insertSelective(record);
      }
-     
-     @Test
-     public void test_(){
-    	
-     }
-     
      
      private void updateLastMessageTime(UserBaseInfo userBaseInfo){
     	 //userDetailInfoMapper.se

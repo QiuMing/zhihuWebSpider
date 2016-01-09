@@ -3,7 +3,6 @@ package com.ming.zhihuWebSpider.process;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.util.Strings;
 
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -59,7 +58,7 @@ public class UserDetailInfoProcessor implements PageProcessor{
 		
 		//状态
 		String status = page.getHtml().xpath("//div[@class='zh-profile-account-status']/text()").toString();
-		if(Strings.isNullOrEmpty(status))
+		if(StringUtils.isEmpty(status))
 			page.putField("status","active");
 		else
 			page.putField("status","noActive");
