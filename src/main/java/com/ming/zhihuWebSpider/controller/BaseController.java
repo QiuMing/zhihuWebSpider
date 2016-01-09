@@ -17,7 +17,8 @@ import com.ming.zhihuWebSpider.mapping.UserDetailInfoMapper;
 import com.ming.zhihuWebSpider.model.UserBaseInfo;
 import com.ming.zhihuWebSpider.model.UserDetailInfo;
 import com.ming.zhihuWebSpider.model.extend.BarInfoData;
-import com.ming.zhihuWebSpider.model.extend.GenderInfo;
+import com.ming.zhihuWebSpider.model.extend.NameValue;
+import com.ming.zhihuWebSpider.model.extend.NameValue;
 import com.ming.zhihuWebSpider.spider.UserBaseInfoCrawl;
 
 @Controller
@@ -56,8 +57,8 @@ public class BaseController {
 	}
 	
 	@RequestMapping("getGenderInfo")
-	public @ResponseBody List<GenderInfo> getGenderInfo(){
-		List<GenderInfo> results = new ArrayList<GenderInfo>();
+	public @ResponseBody List<NameValue> getGenderInfo(){
+		List<NameValue> results = new ArrayList<NameValue>();
 	
 		UserDetailInfo record4 = new UserDetailInfo();
 	   	record4.setGender("icon icon-profile-male");
@@ -71,9 +72,9 @@ public class BaseController {
 	   	example.createCriteria().andIsNull("gender");
 	   	Integer unknow = userDetailInfoMapper.selectCountByExample(example);
 	   	
-	   	results.add(new GenderInfo("男",man));
-	   	results.add(new GenderInfo("女",girl));
-	   	results.add(new GenderInfo("未知",unknow));
+	   	results.add(new NameValue("男",man));
+	   	results.add(new NameValue("女",girl));
+	   	results.add(new NameValue("未知",unknow));
 	   	
 	   	System.err.println(JSON.toJSONString(results));
 		return results;
@@ -130,10 +131,10 @@ public class BaseController {
  		return data;
 	}
 	
-	@RequestMapping("getEmploymentStatic")
+	/*@RequestMapping("getEmploymentStatic")
 	public @ResponseBody BarInfoData getEmploymentStatic(){
 		List<UserDetailInfo> result =  userDetailInfoMapper.getEmploymentStatic(10);
- 		System.err.println("人群工作分布"+JSON.toJSONString(result));
+ 		System.err.println("人群身份分布"+JSON.toJSONString(result));
  		String[] sxAxis = new String[result.size()];
  		Integer[] yAxis = new Integer[result.size()];
  		for(int i=0;i<result.size();i++){
@@ -144,6 +145,17 @@ public class BaseController {
  		data.setsXAxis(sxAxis);
  		data.setyAxis(yAxis);
  		System.err.println(JSON.toJSONString(data));
+ 		return data;
+	}*/
+	@RequestMapping("getEmploymentStatic")
+	public @ResponseBody List<NameValue>  getEmploymentStatic(){
+		List<UserDetailInfo> result =  userDetailInfoMapper.getEmploymentStatic(10);
+		List<NameValue>  data = new ArrayList<NameValue>();
+		for(UserDetailInfo item:result){
+ 			NameValue re = new NameValue(item.getEmployment(), item.getItemResultAmount());
+ 			data.add(re);
+ 		}
+		System.err.println(JSON.toJSONString(data));
  		return data;
 	}
 }

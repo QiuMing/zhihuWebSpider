@@ -1,10 +1,10 @@
 package com.ming.zhihuWebSpider.model.extend;
 
-public class GenderInfo{
+public class NameValue{
 	String name;
 	Integer value;
 	
-	public GenderInfo(String name, Integer value) {
+	public NameValue(String name, Integer value) {
 		super();
 		this.name = name;
 		this.value = value;

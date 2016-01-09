@@ -42,7 +42,6 @@
 			 })
         	
 		});
-        console.log("+"+response)
 		//---------------------------------------------
 		var locationData='';
 		$.post("getLocationInfo",function(data){
@@ -74,8 +73,8 @@
                 'echarts/chart/pie', // 使用柱状图就加载bar模块
                 'echarts/chart/funnel', //漏斗 
                 'echarts/chart/bar', //柱状图
-                'echarts/chart/line'  //折线
-              
+                'echarts/chart/line',  //折线
+                'echarts/chart/treemap',   //矩形
             ],
             DrawEChart 
         );
@@ -87,6 +86,22 @@
         	var educationChart = ec.init(document.getElementById('education'));  
         	var employmentChart = ec.init(document.getElementById('employment'));  
         	
+        	// 载入动画---------------------
+            genderChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            locationChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            businessChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            educationChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            employmentChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
             var option = {
 			    title : {
 			        text: '用户性别统计',
@@ -337,7 +352,7 @@
 	        	        }
 	        	    ]
 	        	};
-            var employmentOption = {
+           /*  var employmentOption = {
 	        	    title : {
 	        	        text: '工作岗位',
 	        	        subtext: '显示前10',
@@ -403,13 +418,63 @@
 	        	            }
 	        	        }
 	        	    ]
-	        	};
+	        	}; */
             
+	        	var employmentOption = {
+	        		    title : {
+	        		        text: '人群身份分布',
+	        		        subtext: '显示前10'
+	        		    },
+	        		    tooltip : {
+	        		        trigger: 'item',
+	        		        formatter: "{b}: {c}"
+	        		    },
+	        		    toolbox: {
+	        		        show : true,
+	        		        feature : {
+	        		            mark : {show: true},
+	        		            dataView : {show: true, readOnly: false},
+	        		            restore : {show: true},
+	        		            saveAsImage : {show: true}
+	        		        }
+	        		    },
+	        		    calculable : false,
+	        		    series : [
+	        		        {
+	        		            name:'矩形图',
+	        		            type:'treemap',
+	        		            itemStyle: {
+	        		                normal: {
+	        		                    label: {
+	        		                        show: true,
+	        		                        formatter: "{b}"
+	        		                    },
+	        		                    borderWidth: 1
+	        		                },
+	        		                emphasis: {
+	        		                    label: {
+	        		                        show: true
+	        		                    }
+	        		                }
+	        		            },
+	        		            data:employmentData
+	        		        }
+	        		    ]
+	        		};
             
+            genderChart.hideLoading(); 
             genderChart.setOption(option);
+            
+            locationChart.hideLoading(); 
             locationChart.setOption(locationOption);
+            
+            businessChart.hideLoading(); 
             businessChart.setOption(businessOption);
+            
+            educationChart.hideLoading(); 
             educationChart.setOption(educationOption);
+            
+            employmentChart.hideLoading(); 
             employmentChart.setOption(employmentOption);
         }
         
