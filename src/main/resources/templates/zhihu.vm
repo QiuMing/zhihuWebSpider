@@ -104,6 +104,9 @@
             employmentChart.showLoading({
                 text: '正在努力的读取数据中...',     
             });
+            console.log('--')
+            setTimeout(function(){
+            
             var option = {
 			    title : {
 			        text: '用户性别统计',
@@ -477,13 +480,11 @@
             
             employmentChart.hideLoading();
             console.log('--')
-            setTimeout(function(){
-            console.log('--')
-	            locationChart.setOption(locationOption);
-	            genderChart.setOption(option);
-	            employmentChart.setOption(employmentOption);
-	            businessChart.setOption(businessOption);
-	            educationChart.setOption(educationOption);
+            locationChart.setOption(locationOption);
+            genderChart.setOption(option);
+            employmentChart.setOption(employmentOption);
+            businessChart.setOption(businessOption);
+            educationChart.setOption(educationOption);
             },3000);
         }
         
