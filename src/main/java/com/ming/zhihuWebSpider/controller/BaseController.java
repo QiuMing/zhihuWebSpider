@@ -18,7 +18,6 @@ import com.ming.zhihuWebSpider.model.UserBaseInfo;
 import com.ming.zhihuWebSpider.model.UserDetailInfo;
 import com.ming.zhihuWebSpider.model.extend.BarInfoData;
 import com.ming.zhihuWebSpider.model.extend.NameValue;
-import com.ming.zhihuWebSpider.spider.UserBaseInfoCrawl;
 
 @Controller
 public class BaseController {
@@ -28,9 +27,6 @@ public class BaseController {
 	
 	@Autowired
 	private UserDetailInfoMapper userDetailInfoMapper;
-	
-	@Autowired
-	private UserBaseInfoCrawl userBaseInfoCrawl;
 	
 	@RequestMapping("zhihu")
 	public String showPage(ModelMap model) {
