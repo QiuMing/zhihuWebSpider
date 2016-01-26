@@ -1,5 +1,7 @@
 package com.ming.zhihuWebSpider;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -33,30 +35,38 @@ public class AppTest    extends AbstractServiceTests
      @Test
      public void test_selleAmountByProperty(){
     	 UserBaseInfo record = new UserBaseInfo();
-    	 System.err.println("基本信息人数    "+userBaseInfoMapper.selectCount(record));
+    	 System.out.println("基本信息人数    "+userBaseInfoMapper.selectCount(record));
     	 
     	 UserDetailInfo record2 = new UserDetailInfo();
-    	 System.err.println("详细信息人数     "+userDetailInfoMapper.selectCount(record2));
+    	 System.out.println("详细信息人数     "+userDetailInfoMapper.selectCount(record2));
     	 
     	 UserDetailInfo record4 = new UserDetailInfo();
     	 record4.setGender("icon icon-profile-male");
-    	 System.err.println("男      "+userDetailInfoMapper.selectCount(record4));
+    	 System.out.println("男      "+userDetailInfoMapper.selectCount(record4));
     	 
     	 UserDetailInfo record5 = new UserDetailInfo();
     	 record5.setGender("icon icon-profile-female");
-    	 System.err.println("女      "+userDetailInfoMapper.selectCount(record5));
+    	 System.out.println("女      "+userDetailInfoMapper.selectCount(record5));
     	 
     	 Example example = new Example(UserDetailInfo.class);
     	 example.createCriteria().andIsNull("gender");
-    	 System.err.println("为空的  "+userDetailInfoMapper.selectCountByExample(example));
+    	 System.out.println("为空的  "+userDetailInfoMapper.selectCountByExample(example));
     	 
     	 Example example1 = new Example(UserDetailInfo.class);
     	 example1.createCriteria().andIsNotNull("status");
-    	 System.err.println("为空的  "+userDetailInfoMapper.selectCountByExample(example1));
-    	 
-    	 
+    	 System.out.println("为空的  "+userDetailInfoMapper.selectCountByExample(example1));
      }
      
+     @Test
+     public void test_selectLike(){
+    	 String searchName = "波波熊";
+    	 Example example1 = new Example(UserBaseInfo.class);
+    	 example1.selectProperties("nickname","location","weiboUrl","headline","description");
+    	 example1.createCriteria().andLike("nickname", searchName);
+    	 List<UserBaseInfo> result = (List<UserBaseInfo>) userBaseInfoMapper.selectByExample(example1);
+    	 System.out.println("查找昵称为"+searchName+"结果为 "+JSON.toJSONString(result));
+    	 
+     }
      @Test
      public void test_selectFunction(){
     	 logger.info("人群地域分布"+JSON.toJSONString(userBaseInfoMapper.getLocationStatic(10)));

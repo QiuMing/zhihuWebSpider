@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tk.mybatis.mapper.entity.Example;
@@ -36,21 +38,31 @@ public class BaseController {
 		
 	}
 	
-	enum Gender{
-		female,male,unknow
-	}
-	public int geAmountByGender(String gender){
-		UserDetailInfo record = new UserDetailInfo();
-		if(gender.equals(Gender.female.toString()))
-			record.setGender(Gender.female.toString());
-		else if(gender.equals(Gender.male.toString()))
-			record.setGender(Gender.male.toString());
-		else
-			record.setGender(null);
-		
-		return userDetailInfoMapper.selectCount(record);	
+	@RequestMapping(value = "getAmount/{type}")
+	public @ResponseBody Integer getAmountByType(@PathVariable String type){
+		Integer result = 0;
+		if(type.equals("base")){
+			UserBaseInfo record = new UserBaseInfo();
+			result = userBaseInfoMapper.selectCount(record);
+   	 		System.out.println("基本信息人数    "+result );
+		}
+		else{
+   	 		UserDetailInfo record2 = new UserDetailInfo();
+   	 		result = userDetailInfoMapper.selectCount(record2);
+   	 		System.out.println("详细信息人数     "+result);
+		}
+		return result;
 	}
 	
+	@RequestMapping(value = "searchByName")
+	public  @ResponseBody List<UserBaseInfo> searchByName(@RequestParam(value = "name",  required = true)String name){
+		Example example1 = new Example(UserBaseInfo.class);
+   	 	example1.selectProperties("nickname","location","weiboUrl","headline","description");
+   	 	example1.createCriteria().andLike("nickname", name);
+   	 	List<UserBaseInfo> result = (List<UserBaseInfo>) userBaseInfoMapper.selectByExample(example1);
+   	 	System.out.println("查找昵称为"+name+"结果为 "+JSON.toJSONString(result));
+   	 	return result;
+	}
 	@RequestMapping("getGenderInfo")
 	public @ResponseBody List<NameValue> getGenderInfo(){
 		List<NameValue> results = new ArrayList<NameValue>();
@@ -71,14 +83,14 @@ public class BaseController {
 	   	results.add(new NameValue("女",girl));
 	   	results.add(new NameValue("未知",unknow));
 	   	
-	   	System.err.println(JSON.toJSONString(results));
+	   	System.out.println(JSON.toJSONString(results));
 		return results;
 	}
 	
 	@RequestMapping("getLocationInfo")
 	public @ResponseBody BarInfoData getLocationInfo(){
 		List<UserBaseInfo> result =  userBaseInfoMapper.getLocationStatic(10);
- 		System.err.println("人群地域分布"+JSON.toJSONString(result));
+ 		System.out.println("人群地域分布"+JSON.toJSONString(result));
  		String[] sxAxis = new String[result.size()];
  		Integer[] yAxis = new Integer[result.size()];
  		for(int i=0;i<result.size();i++){
@@ -88,14 +100,14 @@ public class BaseController {
  		BarInfoData data = new BarInfoData(yAxis,sxAxis);
  		data.setsXAxis(sxAxis);
  		data.setyAxis(yAxis);
- 		System.err.println(JSON.toJSONString(data));
+ 		System.out.println(JSON.toJSONString(data));
  		return data;
 	}
 	
 	@RequestMapping("getBusinessStatic")
 	public @ResponseBody BarInfoData getBusinessStatic(){
 		List<UserDetailInfo> result =  userDetailInfoMapper.getBusinessStatic(10);
- 		System.err.println("人群行业分布"+JSON.toJSONString(result));
+ 		System.out.println("人群行业分布"+JSON.toJSONString(result));
  		String[] sxAxis = new String[result.size()];
  		Integer[] yAxis = new Integer[result.size()];
  		for(int i=0;i<result.size();i++){
@@ -105,14 +117,14 @@ public class BaseController {
  		BarInfoData data = new BarInfoData(yAxis,sxAxis);
  		data.setsXAxis(sxAxis);
  		data.setyAxis(yAxis);
- 		System.err.println(JSON.toJSONString(data));
+ 		System.out.println(JSON.toJSONString(data));
  		return data;
 	}
 	
 	@RequestMapping("getEducationStatic")
 	public @ResponseBody BarInfoData getEducationStatic(){
 		List<UserDetailInfo> result =  userDetailInfoMapper.getEducationStatic(10);
- 		System.err.println("人群受教育程度分布"+JSON.toJSONString(result));
+ 		System.out.println("人群受教育程度分布"+JSON.toJSONString(result));
  		String[] sxAxis = new String[result.size()];
  		Integer[] yAxis = new Integer[result.size()];
  		for(int i=0;i<result.size();i++){
@@ -122,14 +134,14 @@ public class BaseController {
  		BarInfoData data = new BarInfoData(yAxis,sxAxis);
  		data.setsXAxis(sxAxis);
  		data.setyAxis(yAxis);
- 		System.err.println(JSON.toJSONString(data));
+ 		System.out.println(JSON.toJSONString(data));
  		return data;
 	}
 	
 	/*@RequestMapping("getEmploymentStatic")
 	public @ResponseBody BarInfoData getEmploymentStatic(){
 		List<UserDetailInfo> result =  userDetailInfoMapper.getEmploymentStatic(10);
- 		System.err.println("人群身份分布"+JSON.toJSONString(result));
+ 		System.out.println("人群身份分布"+JSON.toJSONString(result));
  		String[] sxAxis = new String[result.size()];
  		Integer[] yAxis = new Integer[result.size()];
  		for(int i=0;i<result.size();i++){
@@ -139,9 +151,10 @@ public class BaseController {
  		BarInfoData data = new BarInfoData(yAxis,sxAxis);
  		data.setsXAxis(sxAxis);
  		data.setyAxis(yAxis);
- 		System.err.println(JSON.toJSONString(data));
+ 		System.out.println(JSON.toJSONString(data));
  		return data;
 	}*/
+	
 	@RequestMapping("getEmploymentStatic")
 	public @ResponseBody List<NameValue>  getEmploymentStatic(){
 		List<UserDetailInfo> result =  userDetailInfoMapper.getEmploymentStatic(10);
@@ -150,7 +163,22 @@ public class BaseController {
  			NameValue re = new NameValue(item.getEmployment(), item.getItemResultAmount());
  			data.add(re);
  		}
-		System.err.println(JSON.toJSONString(data));
+		System.out.println(JSON.toJSONString(data));
  		return data;
+	}
+	
+	enum Gender{
+		female,male,unknow
+	}
+	public int geAmountByGender(String gender){
+		UserDetailInfo record = new UserDetailInfo();
+		if(gender.equals(Gender.female.toString()))
+			record.setGender(Gender.female.toString());
+		else if(gender.equals(Gender.male.toString()))
+			record.setGender(Gender.male.toString());
+		else
+			record.setGender(null);
+		
+		return userDetailInfoMapper.selectCount(record);	
 	}
 }

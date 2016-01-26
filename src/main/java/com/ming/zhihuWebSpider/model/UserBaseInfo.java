@@ -6,10 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import us.codecraft.webmagic.model.annotation.ExtractBy;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
 //@HelpUrl("https://github.com/\\w+")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @TargetUrl(value="http://www.zhihu.com/people/[\\w-]+")
 @Table(name = "user_base_info")
 public class UserBaseInfo {
@@ -150,6 +153,7 @@ public class UserBaseInfo {
     /**
      * limit  查询参数
      */
+    
     private Integer selectLimitAmount;
 
     /**

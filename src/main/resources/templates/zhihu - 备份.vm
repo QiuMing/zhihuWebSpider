@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+    <div id="gender" style="height:400px; width:800px; padding: 10px;margin-right: auto; margin-left: auto; "></div>
+    <hr style="filter: alpha(opacity=0,finishopacity=100,style=1)" width="80%" color=#987cb9 size=3>
+    <div id="location" style="height:400px; width:800px; padding: 10px;margin-right: auto; margin-left: auto; "></div>
+    <hr style="filter: alpha(opacity=0,finishopacity=100,style=1)" width="80%" color=#987cb9 size=3>
+    <div id="business" style="height:400px; width:800px; padding: 10px;margin-right: auto; margin-left: auto; "></div>
+    <hr style="filter: alpha(opacity=0,finishopacity=100,style=1)" width="80%" color=#987cb9 size=3>
+    <div id="education" style="height:400px; width:800px; padding: 10px;margin-right: auto; margin-left: auto; "></div>
+    <hr style="filter: alpha(opacity=0,finishopacity=100,style=1)" width="80%" color=#987cb9 size=3>
+    <div id="employment" style="height:400px; width:800px; padding: 10px;margin-right: auto; margin-left: auto; "></div>
+<!--     <div id="employment" style="height:400px; width:800px;border: 1px solid #ccc; padding: 10px;margin-right: auto; margin-left: auto; "></div> -->
+   
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+	
+        // echart使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/pie', // 使用柱状图就加载bar模块
+                'echarts/chart/funnel', //漏斗 
+                'echarts/chart/bar', //柱状图
+                'echarts/chart/line',  //折线
+                'echarts/chart/treemap',   //矩形
+            ],
+            DrawEChart 
+        );
+        
+        function DrawEChart(ec) {
+        	var genderChart = ec.init(document.getElementById('gender'));   
+        	var locationChart = ec.init(document.getElementById('location'));  
+        	var businessChart = ec.init(document.getElementById('business'));  
+        	var educationChart = ec.init(document.getElementById('education'));  
+        	var employmentChart = ec.init(document.getElementById('employment'));  
+        	
+        	// 载入动画---------------------
+            genderChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            locationChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            businessChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            educationChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            employmentChart.showLoading({
+                text: '正在努力的读取数据中...',     
+            });
+            
+            
+          //---------------------------------------------
+            $.post("getGenderInfo",function(data){
+            	var legendData=new Array();
+                var amount=0;
+            	var genderInfo =  JSON.stringify(data);
+    			 $.each(JSON.parse(genderInfo), function(i, item) {
+    				 amount = item.value+amount
+    				 legendData.push(item.name)
+    			 })
+    			 
+    			 var genderOption = {
+    				    title : {
+    				        text: '用户性别统计',
+    				        subtext: '基数'+amount,
+    				        x:'center'
+    				    },
+    				    tooltip : {
+    				        trigger: 'item',
+    				        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    				    },
+    				    legend: {
+    				        orient : 'vertical',
+    				        x : 'left',
+    				    	data:legendData
+    				    },
+    				    toolbox: {
+    				        show : true,
+    				        feature : {
+    				            mark : {show: true},
+    				            dataView : {show: true, readOnly: false},
+    				            magicType : {
+    				                show: true, 
+    				                type: ['pie', 'funnel'],
+    				                option: {
+    				                    funnel: {
+    				                        x: '25%',
+    				                        width: '50%',
+    				                        funnelAlign: 'left',
+    				                        max: amount
+    				                    }
+    				                }
+    				            },
+    				            restore : {show: true},
+    				            saveAsImage : {show: true}
+    				        }
+    				    },
+    				    calculable : true,
+    				    series : [
+    				        {
+    				            name:'访问来源',
+    				            type:'pie',
+    				            radius : '55%',
+    				            center: ['50%', '60%'],
+    				        	data
+    				        }
+    				    ]
+    				};
+    			 genderChart.hideLoading(); 
+    	         genderChart.setOption(genderOption);
+    		});
+        	
+          //---------------------------------------------
+    		$.post("getLocationInfo",function(locationData){
+    			console.log(JSON.stringify(locationData))
+    			var locationOption = {
+    	        	    title : {
+    	        	        text: '地域分布图',
+    	        	        subtext: '显示前10',
+    	        	        x:'center'
+    	        	    },
+    	        	    tooltip : {
+    	        	        trigger: 'axis'
+    	        	    },
+    	        	    toolbox: {
+    	        	        show : true,
+    	        	        feature : {
+    	        	            mark : {show: true},
+    	        	            dataView : {show: true, readOnly: false},
+    	        	            magicType : {show: true, type: ['line', 'bar']},
+    	        	            restore : {show: true},
+    	        	            saveAsImage : {show: true}
+    	        	        }
+    	        	    },
+    	        	    calculable : true,
+    	        	    grid: {
+    	        	        borderWidth: 0,
+    	        	        y: 80,
+    	        	        y2: 60
+    	        	    },
+    	        	    xAxis : [
+    	        	        {
+    	        	            type : 'category',
+    	        	            data : locationData.sXAxis
+    	        	        }
+    	        	    ],
+    	        	    yAxis : [
+    	        	        {
+    	        	            type : 'value'
+    	        	        }
+    	        	    ],
+    	        	    series : [
+    	        	        {
+    	        	            name:'人数',
+    	        	            type:'bar',
+    	        	            itemStyle: {
+    	        	                normal: {
+    	        	                    color: function(params) {
+    	        	                        var colorList = [
+    	        	                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+    	        	                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+    	        	                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+    	        	                        ];
+    	        	                        return colorList[params.dataIndex]
+    	        	                    },
+    	        	                    label: {
+    	        	                        show: true,
+    	        	                        position: 'top',
+    	        	                        formatter: '{b}\n{c}'
+    	        	                    },
+    	        	                    barBorderRadius:5
+    	        	                }
+    	        	            },
+    	        	            data:locationData.yAxis,
+    	        	            markLine : {
+    	        	                data : [
+    	        	                    {type : 'average', name: '平均值'}
+    	        	                ]
+    	        	            }
+    	        	        }
+    	        	    ]
+    	        	};
+    	            locationChart.hideLoading(); 
+    	            locationChart.setOption(locationOption);
+    		});
+            
+    		//---------------------------------------------
+    		$.post("getBusinessStatic",function(businessData){
+    			console.log(JSON.stringify(businessData))
+    			var businessOption = {
+	        	    title : {
+	        	        text: '人群行业分布图',
+	        	        subtext: '显示前10',
+	        	        x:'center'
+	        	    },
+	        	    tooltip : {
+	        	        trigger: 'axis'
+	        	    },
+	        	    toolbox: {
+	        	        show : true,
+	        	        feature : {
+	        	            mark : {show: true},
+	        	            dataView : {show: true, readOnly: false},
+	        	            magicType : {show: true, type: ['line', 'bar']},
+	        	            restore : {show: true},
+	        	            saveAsImage : {show: true}
+	        	        }
+	        	    },
+	        	    calculable : true,
+	        	    grid: {
+	        	        borderWidth: 0,
+	        	        y: 80,
+	        	        y2: 60
+	        	    },
+	        	    xAxis : [
+	        	        {
+	        	            type : 'category',
+	        	            data : businessData.sXAxis
+	        	        }
+	        	    ],
+	        	    yAxis : [
+	        	        {
+	        	            type : 'value'
+	        	        }
+	        	    ],
+	        	    series : [
+	        	        {
+	        	            name:'人数',
+	        	            type:'bar',
+	        	            itemStyle: {
+	        	                normal: {
+	        	                    color: function(params) {
+	        	                        var colorList = [
+	        	                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+	        	                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+	        	                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+	        	                        ];
+	        	                        return colorList[params.dataIndex]
+	        	                    },
+	        	                    label: {
+	        	                        show: true,
+	        	                        position: 'top',
+	        	                        formatter: '{b}\n{c}'
+	        	                    },
+	        	                    barBorderRadius:5
+	        	                }
+	        	            },
+	        	            data:businessData.yAxis,
+	        	            markLine : {
+	        	                data : [
+	        	                    {type : 'average', name: '平均值'}
+	        	                ]
+	        	            }
+	        	        }
+	        	    ]
+	        	};
+    	         businessChart.hideLoading(); 
+    	         businessChart.setOption(businessOption);
+    		});
+    		//---------------------------------------------
+    		$.post("getEducationStatic",function(educationData){
+    			console.log(JSON.stringify(educationData))
+    			 var educationOption = {
+	        	    title : {
+	        	        text: '人群受教育程度分布图',
+	        	        subtext: '显示前10',
+	        	        x:'center'
+	        	    },
+	        	    tooltip : {
+	        	        trigger: 'axis'
+	        	    },
+	        	    toolbox: {
+	        	        show : true,
+	        	        feature : {
+	        	            mark : {show: true},
+	        	            dataView : {show: true, readOnly: false},
+	        	            magicType : {show: true, type: ['line', 'bar']},
+	        	            restore : {show: true},
+	        	            saveAsImage : {show: true}
+	        	        }
+	        	    },
+	        	    calculable : true,
+	        	    grid: {
+	        	        borderWidth: 0,
+	        	        y: 80,
+	        	        y2: 60
+	        	    },
+	        	    xAxis : [
+	        	        {
+	        	            type : 'category',
+	        	            data : educationData.sXAxis
+	        	        }
+	        	    ],
+	        	    yAxis : [
+	        	        {
+	        	            type : 'value'
+	        	        }
+	        	    ],
+	        	    series : [
+	        	        {
+	        	            name:'人数',
+	        	            type:'bar',
+	        	            itemStyle: {
+	        	                normal: {
+	        	                    color: function(params) {
+	        	                        var colorList = [
+	        	                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+	        	                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+	        	                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+	        	                        ];
+	        	                        return colorList[params.dataIndex]
+	        	                    },
+	        	                    label: {
+	        	                        show: true,
+	        	                        position: 'top',
+	        	                        formatter: '{b}\n{c}'
+	        	                    },
+	        	                    barBorderRadius:5
+	        	                }
+	        	            },
+	        	            data:educationData.yAxis,
+	        	            markLine : {
+	        	                data : [
+	        	                    {type : 'average', name: '平均值'}
+	        	                ]
+	        	            }
+	        	        }
+	        	    ]
+	        	};
+    	        educationChart.hideLoading(); 
+    	        educationChart.setOption(educationOption);
+    		});
+    		//---------------------------------------------
+    		$.post("getEmploymentStatic",function(employmentData){
+    			console.log(JSON.stringify(employmentData))
+    			var employmentOption = {
+        		    title : {
+        		        text: '人群身份分布',
+        		        subtext: '显示前10'
+        		    },
+        		    tooltip : {
+        		        trigger: 'item',
+        		        formatter: "{b}: {c}"
+        		    },
+        		    toolbox: {
+        		        show : true,
+        		        feature : {
+        		            mark : {show: true},
+        		            dataView : {show: true, readOnly: false},
+        		            restore : {show: true},
+        		            saveAsImage : {show: true}
+        		        }
+        		    },
+        		    calculable : false,
+        		    series : [
+        		        {
+        		            name:'',
+        		            type:'treemap',
+        		            itemStyle: {
+        		                normal: {
+        		                    label: {
+        		                        show: true,
+        		                        formatter: "{b}"
+        		                    },
+        		                    borderWidth: 1
+        		                },
+        		                emphasis: {
+        		                    label: {
+        		                        show: true
+        		                    }
+        		                }
+        		            },
+        		            data:employmentData
+        		        }
+        		    ]
+        		};
+    	        employmentChart.hideLoading();
+    	        employmentChart.setOption(employmentOption);
+    		});
+        }
+    </script>
+</body>
+</html>

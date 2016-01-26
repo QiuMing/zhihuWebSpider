@@ -25,8 +25,7 @@ public class UserDetailInfoSpider2 implements Crawl {
                     .setCharset("UTF-8")
 		            .addCookie("_xsrf", "cf81e98c4f3b9ea548e9df87a4e5a320")
 			        .addCookie("_za", "8d9d4056-20d8-4d22-bdf7-e88443560b4e")
-			        .addCookie("z_c0", "QUFDQVBrOGlBQUFYQUFBQVlRSlZUYUQ2dGxiSGozdE42SnNlbzg0U2o2WGk5RDZ2Yi1VWUd3PT0=|1452240288|066af60adedc1989e42f55733738e2738a00c2ed")
-			        .addCookie("__utmc", "51854390") ;
+			        .addCookie("z_c0", "QUFDQVBrOGlBQUFYQUFBQVlRSlZUYUQ2dGxiSGozdE42SnNlbzg0U2o2WGk5RDZ2Yi1VWUd3PT0=|1452240288|066af60adedc1989e42f55733738e2738a00c2ed") ;
 
 	public void crawl() {
 		OOSpider.create(site, userDetailInfoPipeline2, UserDetailInfo.class)

@@ -9,3 +9,7 @@
 |mybats|3.2.8|
 |通用maper|3.3.0|
 |百度echart|2.0|
+|layer|2.1|
+|bootstrap|3.0.3|
+##此爬虫仅用来交流学习
+

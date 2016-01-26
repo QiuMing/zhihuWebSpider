@@ -6,10 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import us.codecraft.webmagic.model.annotation.ExtractBy;
 import us.codecraft.webmagic.model.annotation.HelpUrl;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @HelpUrl("http://www.zhihu.com/people/[\\w-]+/followers")
 @TargetUrl(value="http://www.zhihu.com/people/[\\w-]+/about")
 @Table(name = "user_detail_info")
