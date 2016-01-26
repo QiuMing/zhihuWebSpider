@@ -31,9 +31,11 @@
           }
         });
   }
-    setInterval("get_data()",30000);//3秒一次执行
+    setInterval("get_data()",10000);//每10s执行一次刷新
 
     $(function () {
+      get_data();
+    	
       $('#btn-search').on('click', function(){
         var value = $('.form-control').val();
         if(value==""){
@@ -44,8 +46,6 @@
               success: function(data) {
                   layer.msg(JSON.stringify(data));
                   console.log(JSON.stringify(data));
-                  console.log(data);
-                  //$("#base").html("111");
               }
           });
         }
@@ -109,13 +109,13 @@
         <div class="form-group">
            <input type="text"   value="爬虫已死" class="form-control" placeholder="Search">
         </div>
-        <button   type="button" id="btn-search"  class="btn btn-default">提交</button>
+        <!-- <button   type="button" id="btn-search"  class="btn btn-default">提交</button>    尊重知友隐私-->
      </form>
   </div>
 
   <div class="github-fork-ribbon-wrapper right-bottom">
        <div class="github-fork-ribbon"  style=" background-color:#090;">
-           <a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on GitHub</a>
+           <a href="https://github.com/QiuMing/zhihuWebSpider">Fork me on GitHub</a>
        </div>
    </div>
 </nav>
