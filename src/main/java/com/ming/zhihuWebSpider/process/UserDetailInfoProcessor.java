@@ -12,7 +12,13 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.RedisScheduler;
 
-
+/**
+ * @Description TODO
+ * @author Ming
+ * @date: 2016年1月27日--上午9:42:23
+ * 非注解方式的爬虫需要实现PageProcessor 接口
+ * 主要负责数据处理
+ */
 public class UserDetailInfoProcessor implements PageProcessor{
 
 	private static final String START_URL  = "http://www.zhihu.com/people/excited-vczh/about";

@@ -11,6 +11,14 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 
 import com.ming.zhihuWebSpider.mapping.UserDetailInfoMapper;
 import com.ming.zhihuWebSpider.model.UserDetailInfo;
+
+
+/**
+ * @Description TODO
+ * @author Ming
+ * @date: 2016年1月27日--上午9:42:23
+ * 采用了    非注解方式    进行数据爬取，在插入数据库的时候，可对每一个字段进行处理，灵活性高，但比较麻烦
+ */
 @Component
 public class UserDetailInfoPipeline implements Pipeline {
 

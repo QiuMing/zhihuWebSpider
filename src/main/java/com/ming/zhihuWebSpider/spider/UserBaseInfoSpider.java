@@ -11,7 +11,12 @@ import com.ming.zhihuWebSpider.extend.RedisSchedulerExtend2;
 import com.ming.zhihuWebSpider.model.UserBaseInfo;
 import com.ming.zhihuWebSpider.pipeline.UserBaseInfoPipeline;
 
-
+/**
+ * 用户基本信息抓取，注解方式爬取
+ * @Description TODO
+ * @author Ming
+ * @date: 2016年1月27日--下午12:11:17
+ */
 @Component
 public class UserBaseInfoSpider implements Crawl {
 

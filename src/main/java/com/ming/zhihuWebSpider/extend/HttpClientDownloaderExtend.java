@@ -35,6 +35,12 @@ import us.codecraft.webmagic.utils.UrlUtils;
 
 import com.google.common.collect.Sets;
 
+/**
+ * 拓展了 HttpClientDownloader，允许在下载的时候 对url  进行再加工处理
+ * @Description TODO
+ * @author Ming
+ * @date: 2016年1月27日--下午12:13:53
+ */
 public class HttpClientDownloaderExtend extends AbstractDownloader {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

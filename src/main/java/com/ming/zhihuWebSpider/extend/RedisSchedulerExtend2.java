@@ -20,6 +20,7 @@ public class RedisSchedulerExtend2 extends DuplicateRemovedScheduler implements
 
 	private Integer index;
 
+	//在插入redis的队列中时，对url进行处理
 	private String queueName = null;
 	
 	private static final String QUEUE_PREFIX = "queue_";

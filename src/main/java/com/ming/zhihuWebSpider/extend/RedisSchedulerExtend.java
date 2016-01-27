@@ -16,6 +16,7 @@ public class RedisSchedulerExtend extends DuplicateRemovedScheduler implements
 
 	private JedisPool pool;
 
+	//指定redis 数据库的下标
 	private Integer index;
 
 	private static final String QUEUE_PREFIX = "queue_";
