@@ -11,5 +11,13 @@
 |百度echart|2.0|
 |layer|2.1|
 |bootstrap|3.0.3|
-##此爬虫仅用来交流学习
-
+##启动方法
+* 爬虫都放在spider 包下,启动main方法就好
+    * 需要使用Redis 来做调度器 ，也可以修改Scheduler为FileCacheQueueScheduler,如
+    ```
+    (new FileCacheQueueScheduler("/usr/zhihu/cache"))
+    ```
+    * 使用mysql ,配置文件在db.properties
+    * 爬取用户详细信息需要带上cookie,获取cookie 可以通过浏览器，也可以用我的[SimulateLogin](https://github.com/QiuMing/SimulateLogin)，获取之后修改spider site对象 中cookie的值
+* 启动web 则直接运行app 即可
+* 如果是在linux 下，则在配置好数据库的情况下，运行spider.sh 和app.sh 俩脚本就行
