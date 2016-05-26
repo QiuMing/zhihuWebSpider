@@ -23,6 +23,6 @@
 * 如果是在linux 下，则在配置好数据库的情况下，运行spider.sh 和app.sh 俩脚本就行
 
 ## 截图
-![截屏][https://github.com/QiuMing/zhihuWebSpider/screenshot/1.png]
-![截屏][https://github.com/QiuMing/zhihuWebSpider/screenshot/2.png]
-![截屏][https://github.com/QiuMing/zhihuWebSpider/screenshot/3.png]
+![截屏](https://github.com/QiuMing/zhihuWebSpider/screenshot/1.png)
+![截屏](https://github.com/QiuMing/zhihuWebSpider/screenshot/2.png)
+![截屏](https://github.com/QiuMing/zhihuWebSpider/screenshot/.png)
