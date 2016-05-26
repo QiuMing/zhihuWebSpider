@@ -25,4 +25,4 @@
 ## 截图
 ![](https://github.com/QiuMing/zhihuWebSpider/blob/master/screenshot/1.png)
 ![](https://github.com/QiuMing/zhihuWebSpider/blob/master/screenshot/2.png)
-![](https://github.com/QiuMing/zhihuWebSpider/blob/master/screenshot/2.png)
+![](https://github.com/QiuMing/zhihuWebSpider/blob/master/screenshot/3.png)
